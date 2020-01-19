@@ -1,0 +1,27 @@
+使用react+antd搭建一个项目
+一、安装相关插件
+    1、安装react-router-dom：yarn add react-router-dom
+    2、安装axios：yarn add axios
+    3、安装less 、less-loader：yarn add less-loader
+    可以采用 yarn add axios less-loader一次性安装多个插件
+
+二、暴露项目，修改webpack，支持less
+    1、先运行yarn eject
+    2、修改webpack.config/js文件 https://www.jianshu.com/p/bfa308164df4
+
+    （1）、49行添加：
+    const lessRegex = /\.less$/;
+    const lessModuleRegex = /\.module\.less$/;
+    （2）、修改const getStyleLoaders = (cssOptions, lessOptions,preProcessor)，
+    增加了lessOptions，同时在原有的cssOption下面添加
+    {
+        loader: require.resolve('less-loader'),
+        options: lessOptions,
+    },
+    （3）、在497行仿照sass的规则添加less的支持即可
+
+三、安装antd：yarn add antd
+
+四、安装react-router-dom路由组件
+    npm install react-router-dom --save
+    yarn add react-router-dom
