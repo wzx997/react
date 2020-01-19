@@ -10,7 +10,8 @@ import Modals from './pages/ui/modals/modals';//admin页面下的UI下的modal�
 import Loads from './pages/ui/loading/loadings';//admin页面下的UI下的buttons组件
 import Notices from './pages/ui/notices/notices';//admin页面下的UI下的notices组件
 import Messages from './pages/ui/messages/messages';//admin页面下的UI下的messages组件
-import MyTabs from './pages/ui/tabs/tabs';//admin页面下的UI下的messages组件
+import MyTabs from './pages/ui/tabs/tabs';//admin页面下的UI下的tabs组件
+import Gallery from './pages/ui/gallery/gallery';//admin页面下的UI下的tabs组件
 
 import NoMatch from "./pages/nomatch";//404
 
@@ -30,6 +31,7 @@ export default class IRouter extends React.Component{
                                 <Route path="/admin/ui/notices" component={Notices}/>
                                 <Route path="/admin/ui/massages" component={Messages}/>
                                 <Route path="/admin/ui/tabs" component={MyTabs}/>
+                                <Route path="/admin/ui/gallerys" component={Gallery}/>
                                 <Route  component={NoMatch}/>
                             </Switch>
                         </Admin>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Tabs, Button, Alert, Spin, Modal, Icon, message, Select} from 'antd';
+import {Card, Tabs, Button, Alert, Spin, Modal, Icon, Select} from 'antd';
 import '../ui.less'
 
 export default class MyTabs extends React.Component{
@@ -40,7 +40,9 @@ export default class MyTabs extends React.Component{
                             tab={<span>
                                  <Icon type="android" />
                                  小说
-                            </span>} key="2">
+                            </span>}
+                            key="2"
+                        >
                             <Button type="primary">Imooc</Button>
                             <Button>Imooc</Button>
                             <Button type="dashed">Imooc</Button>
