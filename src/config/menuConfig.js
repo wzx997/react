@@ -46,12 +46,12 @@ const menuList = [
         key:'/admin/form',
         children:[
             {
-                title:'古诗文',
-                key:'/admin/form/gsw',
+                title:'登录',
+                key:'/admin/form/login',
             },
             {
-                title:'小说',
-                key:'/admin/form/xs',
+                title:'注册',
+                key:'/admin/form/reg',
             }
         ]
     },

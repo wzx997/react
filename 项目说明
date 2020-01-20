@@ -26,4 +26,5 @@
     npm install react-router-dom --save
     yarn add react-router-dom
 
-五、测试
+五、安装moment,用于时间的默认值
+    yarn add moment --save
