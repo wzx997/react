@@ -25,7 +25,7 @@ export default class Gallery extends React.Component{
         ];
         const imgList = imgs.map((list) => list.map((item) =>
             <Card
-                cover={<img src={"/assets/images/"+item} onClick={()=>this.openImg(item)}/>}
+                cover={<img alt={item} src={"/assets/images/"+item} onClick={()=>this.openImg(item)}/>}
                 key={item}
             >
                 <Card.Meta
@@ -67,7 +67,7 @@ export default class Gallery extends React.Component{
                         });
                     }}
                 >
-                    <img src={this.state.currentImg} style={{width:'100%'}}/>
+                    <img src={this.state.currentImg} alt="这是一张图片" style={{width:'100%'}}/>
                 </Modal>
             </div>
         );

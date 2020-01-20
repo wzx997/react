@@ -42,36 +42,78 @@ const menuList = [
         ]
     },
     {
-        title:'书籍',
-        key:'/admin/books',
+        title:'表单',
+        key:'/admin/form',
         children:[
             {
                 title:'古诗文',
-                key:'/admin/books/gsw',
+                key:'/admin/form/gsw',
             },
             {
                 title:'小说',
-                key:'/admin/books/xs',
+                key:'/admin/form/xs',
             }
         ]
     },
     {
-        title:'电影',
-        key:'/admin/movies',
+        title:'表格',
+        key:'/admin/table',
         children:[
             {
                 title:'中国',
-                key:'/admin/movies/ch',
+                key:'/admin/table/1',
             },
             {
                 title:'欧美',
-                key:'/admin/movies/us',
+                key:'/admin/table/2',
             },
             {
                 title:'日韩',
-                key:'/admin/movies/rh',
+                key:'/admin/table/3',
             },
         ]
-    }
+    },
+    {
+        title:'富文本',
+        key:'/admin/fwb'
+    },
+    {
+        title:'城市管理',
+        key:'/admin/city'
+    },
+    {
+        title:'订单管理',
+        key:'/admin/order'
+    },
+    {
+        title:'员工管理',
+        key:'/admin/staff'
+    },
+    {
+        title:'车辆地图',
+        key:'/admin/car-map'
+    },
+    {
+        title:'图标',
+        key:'/admin/icon',
+        children:[
+            {
+                title:'图标1',
+                key:'/admin/icon/1',
+            },
+            {
+                title:'图标2',
+                key:'/admin/icon/2',
+            },
+            {
+                title:'图标3',
+                key:'/admin/icon/3',
+            },
+        ]
+    },
+    {
+        title:'权限',
+        key:'/admin/auth'
+    },
 ];
 export default menuList;
