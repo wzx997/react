@@ -20,6 +20,8 @@ import Carousels from './pages/ui/carousel/carousels';//admin页面下的UI下�
 import FormLogin from './pages/form/login/login';
 import Reg from './pages/form/reg/reg';
 
+//导入table模块
+import BasicTable from './pages/table/basicTable/basicTable';
 //404页面
 import NoMatch from "./pages/nomatch";//404
 
@@ -44,6 +46,8 @@ export default class IRouter extends React.Component{
 
                                 <Route path="/admin/form/login" component={FormLogin}/>
                                 <Route path="/admin/form/reg" component={Reg}/>
+
+                                <Route path="/admin/table/basic-table" component={BasicTable}/>
                                 <Route  component={NoMatch}/>
                             </Switch>
                         </Admin>

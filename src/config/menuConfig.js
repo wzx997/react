@@ -60,16 +60,12 @@ const menuList = [
         key:'/admin/table',
         children:[
             {
-                title:'中国',
-                key:'/admin/table/1',
+                title:'基本表格',
+                key:'/admin/table/basic-table',
             },
             {
-                title:'欧美',
-                key:'/admin/table/2',
-            },
-            {
-                title:'日韩',
-                key:'/admin/table/3',
+                title:'高级表格',
+                key:'/admin/table/high-table',
             },
         ]
     },
