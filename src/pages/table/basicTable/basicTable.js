@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Table, Divider, Modal, Button,Empty} from 'antd';
+import {Card, Table, Divider, Modal, Button,Pagination } from 'antd';
 import axios from '../../../axios/index';
 
 import '../tables.less';
@@ -10,6 +10,7 @@ export default class BasicTable extends React.Component{
         loadStatus:true,
         dataSource:[],
         dataSource2:[],
+        dataTotal:0,
         ids:[],
         selectedRows:[],
     }
@@ -22,11 +23,12 @@ export default class BasicTable extends React.Component{
     //获取数据，利用axios获取
     getBasicTableData = () => {
         axios.ajax({
-            url:'table/basic-list00',
+            url:'table/basic-list',
         }).then((res)=>{
             if (res.code === 0){
                 this.setState({
                     dataSource2: res.data.res,
+                    dataTotal:res.data.total,
                     loadStatus:false
                 })
             }
@@ -68,6 +70,11 @@ export default class BasicTable extends React.Component{
                 console.log('点击了取消删除数据的按钮');
             }
         });
+    }
+
+    onChange = (page, pageSize) => {
+        console.log(page);
+        console.log(pageSize);
     }
 
     render() {
@@ -158,7 +165,7 @@ export default class BasicTable extends React.Component{
         const rowSelection = {
             type:'radio',
             selectedRowKeys
-        }
+        };
         //复选
         const rowSelection2 = {
             onChange: (selectedRowKeys, selectedRows) => {
@@ -172,8 +179,14 @@ export default class BasicTable extends React.Component{
                     selectedRows
                 })
             },
-        }
-
+        };
+        const paginationProps = {
+            showQuickJumper: true,
+            showTotal: () => `共${this.state.dataTotal}条数据`,
+            total: this.state.dataTotal,
+            size:'small',
+            onChange:this.onChange,
+        };
         return (
             <div>
                 <Card title="基础表格">
@@ -181,7 +194,6 @@ export default class BasicTable extends React.Component{
                         rowKey={record => record.id}
                         columns={columns}
                         dataSource={this.state.dataSource}
-                        locale={{Empty}}
                     />
                 </Card>
                 <Card title="动态数据表格">
@@ -190,7 +202,6 @@ export default class BasicTable extends React.Component{
                         columns={columns}
                         dataSource={this.state.dataSource2}
                         loading={this.state.loadStatus}
-                        locale={{Empty}}
                     />
                 </Card>
                 <Card title="Mock-单选">
@@ -207,7 +218,6 @@ export default class BasicTable extends React.Component{
                         columns={columns}
                         dataSource={this.state.dataSource2}
                         loading={this.state.loadStatus}
-                        locale={{Empty}}
                     />
                 </Card>
                 <Card title="Mock-复选">
@@ -218,7 +228,15 @@ export default class BasicTable extends React.Component{
                         columns={columns}
                         dataSource={this.state.dataSource2}
                         loading={this.state.loadStatus}
-                        locale={{Empty}}
+                    />
+                </Card>
+                <Card title="Mock-分页">
+                    <Table
+                        rowKey={record => record.id}
+                        columns={columns}
+                        dataSource={this.state.dataSource2}
+                        loading={this.state.loadStatus}
+                        pagination={paginationProps}
                     />
                 </Card>
             </div>
