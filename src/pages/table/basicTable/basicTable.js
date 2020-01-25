@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Table, Divider, Modal, Button} from 'antd';
+import {Card, Table, Divider, Modal, Button,Empty} from 'antd';
 import axios from '../../../axios/index';
 
 import '../tables.less';
@@ -22,7 +22,7 @@ export default class BasicTable extends React.Component{
     //获取数据，利用axios获取
     getBasicTableData = () => {
         axios.ajax({
-            url:'table/basic-list',
+            url:'table/basic-list00',
         }).then((res)=>{
             if (res.code === 0){
                 this.setState({
@@ -181,11 +181,7 @@ export default class BasicTable extends React.Component{
                         rowKey={record => record.id}
                         columns={columns}
                         dataSource={this.state.dataSource}
-                        locale={
-                            {
-                                emptyText: '暂无数据'
-                            }
-                        }
+                        locale={{Empty}}
                     />
                 </Card>
                 <Card title="动态数据表格">
@@ -194,11 +190,7 @@ export default class BasicTable extends React.Component{
                         columns={columns}
                         dataSource={this.state.dataSource2}
                         loading={this.state.loadStatus}
-                        locale={
-                            {
-                                emptyText: '暂无数据'
-                            }
-                        }
+                        locale={{Empty}}
                     />
                 </Card>
                 <Card title="Mock-单选">
@@ -215,11 +207,7 @@ export default class BasicTable extends React.Component{
                         columns={columns}
                         dataSource={this.state.dataSource2}
                         loading={this.state.loadStatus}
-                        locale={
-                            {
-                                emptyText: '暂无数据'
-                            }
-                        }
+                        locale={{Empty}}
                     />
                 </Card>
                 <Card title="Mock-复选">
@@ -230,11 +218,7 @@ export default class BasicTable extends React.Component{
                         columns={columns}
                         dataSource={this.state.dataSource2}
                         loading={this.state.loadStatus}
-                        locale={
-                            {
-                                emptyText: '暂无数据'
-                            }
-                        }
+                        locale={{Empty}}
                     />
                 </Card>
             </div>
