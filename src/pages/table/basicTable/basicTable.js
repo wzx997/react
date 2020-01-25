@@ -1,9 +1,10 @@
 import React from "react";
-import {Card, Table, Divider, Modal, Button,Pagination } from 'antd';
+import {Card, Table, Modal, Button} from 'antd';
 import axios from '../../../axios/index';
 
 import '../tables.less';
 import dataSource from './basicDataSource';
+import columns from '../columns';
 
 export default class BasicTable extends React.Component{
     state = {
@@ -57,6 +58,7 @@ export default class BasicTable extends React.Component{
 
     //删除事件
     handleDel = () => {
+        let _this = this;
         let ids = this.state.ids;
         Modal.confirm({
             title: '删除确认',
@@ -78,88 +80,6 @@ export default class BasicTable extends React.Component{
     }
 
     render() {
-        const columns = [
-            {
-                title: 'id',
-                dataIndex: 'id',
-                key: 'id',
-            },
-            {
-                title: '用户名',
-                dataIndex: 'name',
-                key: 'name',
-            },
-            {
-                title: '性别',
-                dataIndex: 'sex',
-                key: 'sex',
-                render: (text) => {
-                    return text === 0 ? '男' : '女'
-                }
-            },
-            {
-                title: '状态',
-                dataIndex: 'state',
-                key: 'state',
-                render: (text) => {
-                    let config = {
-                        0:'初级程序员',
-                        1:'中级程序员',
-                        2:'高级程序员',
-                        3:'资深程序员',
-                    };
-                    return config[text];
-                }
-            },
-            {
-                title: '爱好',
-                dataIndex: 'hobby',
-                key: 'bobby',
-                render: (text,record) => {
-                    let config = {
-                        0:'唱歌',
-                        1:'跑步',
-                        2:'篮球',
-                        3:'足球',
-                        4:'阅读',
-                        5:'旅游',
-                    }
-                    let res = '';
-
-                    text.forEach(item => {
-                        res = config[item]+ ',' + res;
-                    });
-                    return res;
-                }
-            },
-            {
-                title: '生日',
-                dataIndex: 'birthday',
-                key: 'birthday',
-            },
-            {
-                title: '城市',
-                dataIndex: 'city',
-                key: 'city',
-            },
-            {
-                title: '地址',
-                dataIndex: 'address',
-                key: 'address',
-            },
-            {
-                title: '操作',
-                key: 'action',
-                render: (text, record) => (
-                    <span>
-                        <a href="/#/admin">邀请{record.name}</a>
-                        <Divider type="vertical" />
-                        <a href="/#/admin">删除</a>
-                    </span>
-                ),
-            },
-        ];
-
         const {selectedRowKeys} = this.state;
         //单选
         const rowSelection = {
