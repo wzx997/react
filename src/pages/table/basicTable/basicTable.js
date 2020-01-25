@@ -1,6 +1,5 @@
 import React from "react";
-import {Card, Table, Divider} from 'antd';
-// import axios from 'axios';
+import {Card, Table, Divider, Modal, Button} from 'antd';
 import axios from '../../../axios/index';
 
 import '../tables.less';
@@ -10,7 +9,9 @@ export default class BasicTable extends React.Component{
     state = {
         loadStatus:true,
         dataSource:[],
-        dataSource2:[]
+        dataSource2:[],
+        ids:[],
+        selectedRows:[],
     }
 
     componentDidMount() {
@@ -18,6 +19,7 @@ export default class BasicTable extends React.Component{
         this.getBasicTableData();
     }
 
+    //获取数据，利用axios获取
     getBasicTableData = () => {
         axios.ajax({
             url:'table/basic-list',
@@ -27,6 +29,43 @@ export default class BasicTable extends React.Component{
                     dataSource2: res.data.res,
                     loadStatus:false
                 })
+            }
+        });
+    }
+
+    //onRow对应的点击事件
+    onRowClick = (record) => {
+        Modal.info({
+            title: `用户${record.name}的信息`,
+            content:(
+                <div>
+                    <p>姓名：{record.name}</p>
+                    <p>性别：{record.sex}</p>
+                    <p>生日：{record.birthday}</p>
+                    <p>地址：{record.address}</p>
+                </div>
+            )
+        })
+        let selectKey = [record.id];
+        this.setState({
+            selectedRowKeys:selectKey,
+            selectedItem:record
+        })
+    }
+
+    //删除事件
+    handleDel = () => {
+        let ids = this.state.ids;
+        Modal.confirm({
+            title: '删除确认',
+            content: `确认删除这些数据吗，id分别为${ids}`,
+            okText: '确认',
+            cancelText: '取消',
+            onOk(){
+                console.log(`成功删除了下列数据，id分别为${ids}`);
+            },
+            onCancel(){
+                console.log('点击了取消删除数据的按钮');
             }
         });
     }
@@ -113,6 +152,28 @@ export default class BasicTable extends React.Component{
                 ),
             },
         ];
+
+        const {selectedRowKeys} = this.state;
+        //单选
+        const rowSelection = {
+            type:'radio',
+            selectedRowKeys
+        }
+        //复选
+        const rowSelection2 = {
+            onChange: (selectedRowKeys, selectedRows) => {
+                // console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+                let ids = [];
+                selectedRows.forEach(item=>{
+                    ids.push(item.id)
+                })
+                this.setState({
+                    ids,
+                    selectedRows
+                })
+            },
+        }
+
         return (
             <div>
                 <Card title="基础表格">
@@ -130,6 +191,42 @@ export default class BasicTable extends React.Component{
                 <Card title="动态数据表格">
                     <Table
                         rowKey={record => record.id}
+                        columns={columns}
+                        dataSource={this.state.dataSource2}
+                        loading={this.state.loadStatus}
+                        locale={
+                            {
+                                emptyText: '暂无数据'
+                            }
+                        }
+                    />
+                </Card>
+                <Card title="Mock-单选">
+                    <Table
+                        rowKey={record => record.id}
+                        rowSelection={rowSelection}
+                        onRow={(record) => {
+                            return {
+                                onClick: () => {// 点击行
+                                    this.onRowClick(record);
+                                },
+                            };
+                        }}
+                        columns={columns}
+                        dataSource={this.state.dataSource2}
+                        loading={this.state.loadStatus}
+                        locale={
+                            {
+                                emptyText: '暂无数据'
+                            }
+                        }
+                    />
+                </Card>
+                <Card title="Mock-复选">
+                    <Button type="danger" onClick={this.handleDel}>删除</Button>
+                    <Table
+                        rowKey={record => record.id}
+                        rowSelection={rowSelection2}
                         columns={columns}
                         dataSource={this.state.dataSource2}
                         loading={this.state.loadStatus}

@@ -20,7 +20,7 @@ export default class Axions {
             axios({
                 url: URL + options.url,
                 method: options.method ? options.method : 'post',
-                timeout: 5000,
+                timeout: 10000,
                 params: (options.data && options.data.params) || '',
             }).then((respose) => {
                 if (respose.status === 200) {
