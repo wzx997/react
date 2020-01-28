@@ -5,6 +5,7 @@ import App from "./App";
 //导入自定义的组件
 import Login from './pages/login';//登录页面
 import Admin from './admin.js';//admin主页面
+import Common from './common';//耳机菜单的根组件
 
 //导入ui模块
 import Buttons from './pages/ui/buttons/buttons';//admin页面下的UI下的buttons组件
@@ -27,8 +28,13 @@ import HighTable from './pages/table/highTable/highTable';
 //导入城市管理
 import City from './pages/city/index';
 
+//导入订单管理
+import Order from './pages/order/index';
+import OrderDetail from './pages/order/detail';
+
 //404页面
-import NoMatch from "./pages/nomatch";//404
+import NoMatch from "./pages/nomatch";
+//404
 
 
 export default class IRouter extends React.Component{
@@ -56,11 +62,20 @@ export default class IRouter extends React.Component{
                                 <Route path="/admin/table/high-table" component={HighTable}/>
 
                                 <Route path="/admin/city" component={City}/>
+
+                                <Route path="/admin/order" component={Order}/>
+
                                 <Route  component={NoMatch}/>
                             </Switch>
                         </Admin>
                     }/>
-                    <Route path="/order/detail" component={Login}/>
+                    <Route path="/common" render={()=>
+                        <Common>{/*加载Common的子路由*/}
+                            <Switch>
+                                <Route path="/common/order/detail/:orderId" component={OrderDetail}/>
+                            </Switch>
+                        </Common>
+                    }/>
                 </App>
             </HashRouter>
         );
