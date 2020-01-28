@@ -88,9 +88,10 @@ export default class City extends React.Component{
 
     handleSearchSubmit = (e) => {
         e.preventDefault();
-        this.openCityForm.props.form.validateFieldsAndScroll((err, values) => {
+        this.cityListForm.props.form.validateFieldsAndScroll((err, values) => {
             if (!err){
                 console.log(JSON.stringify(values));
+                this.cityListForm.props.form.resetFields();
             }else {
                 notification.error({
                         message: '发生了一些错误！！！',
@@ -112,7 +113,7 @@ export default class City extends React.Component{
             <div>
                 <Card className='card-wrap'>
                     <FilterForm
-                        wrappedComponentRef={(inst) => {this.openCityForm = inst;}}
+                        wrappedComponentRef={(inst) => {this.cityListForm = inst;}}
                         handleSearchSubmit={this.handleSearchSubmit}
                     />
                 </Card>
