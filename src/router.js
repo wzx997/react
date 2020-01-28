@@ -23,6 +23,10 @@ import Reg from './pages/form/reg/reg';
 //导入table模块
 import BasicTable from './pages/table/basicTable/basicTable';
 import HighTable from './pages/table/highTable/highTable';
+
+//导入城市管理
+import City from './pages/city/index';
+
 //404页面
 import NoMatch from "./pages/nomatch";//404
 
@@ -50,6 +54,8 @@ export default class IRouter extends React.Component{
 
                                 <Route path="/admin/table/basic-table" component={BasicTable}/>
                                 <Route path="/admin/table/high-table" component={HighTable}/>
+
+                                <Route path="/admin/city" component={City}/>
                                 <Route  component={NoMatch}/>
                             </Switch>
                         </Admin>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Table, Divider, Modal, Button,Pagination } from 'antd';
+import {Card, Table} from 'antd';
 import axios from '../../../axios/index';
 
 import '../tables.less';
@@ -7,7 +7,6 @@ import columns from "../columns";
 import columns2 from "../columns2";
 import columns3 from "../columns3";
 import columns4 from "../columns4";
-import dataSource from "../basicTable/basicDataSource";
 
 
 export default class HighTable extends React.Component{

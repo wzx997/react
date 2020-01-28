@@ -58,7 +58,6 @@ export default class BasicTable extends React.Component{
 
     //删除事件
     handleDel = () => {
-        let _this = this;
         let ids = this.state.ids;
         Modal.confirm({
             title: '删除确认',
