@@ -32,6 +32,10 @@ import City from './pages/city/index';
 import Order from './pages/order/index';
 import OrderDetail from './pages/order/detail';
 
+//导入用户管理
+import User from './pages/user/index'
+import UserDetail from  './pages/user/detail';
+
 //404页面
 import NoMatch from "./pages/nomatch";
 //404
@@ -65,6 +69,8 @@ export default class IRouter extends React.Component{
 
                                 <Route path="/admin/order" component={Order}/>
 
+                                <Route path="/admin/staff" component={User}/>
+
                                 <Route  component={NoMatch}/>
                             </Switch>
                         </Admin>
@@ -73,6 +79,7 @@ export default class IRouter extends React.Component{
                         <Common>{/*加载Common的子路由*/}
                             <Switch>
                                 <Route path="/common/order/detail/:orderId" component={OrderDetail}/>
+                                <Route path="/common/staff/detail/:userId" component={UserDetail}/>
                             </Switch>
                         </Common>
                     }/>

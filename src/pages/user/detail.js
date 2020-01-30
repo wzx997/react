@@ -3,18 +3,18 @@ import {Card, Descriptions} from 'antd';
 
 import './index.less';
 
-export default class OrderDetail extends React.Component{
+export default class StaffDetail extends React.Component{
     constructor(props) {
         super(props);
         this.state={
-            orderId:this.props.match.params.orderId
+            userId:this.props.match.params.userId
         }
     }
 
     render() {
         return (
             <div>
-                <Card title={`id为${this.state.orderId}的信息`} className="card-wrap">
+                <Card title={`id为${this.state.userId}的信息`} className="card-wrap">
                     <Descriptions title="User Info">
                         <Descriptions.Item label="UserName">Zhou Maomao</Descriptions.Item>
                         <Descriptions.Item label="Telephone">1810000000</Descriptions.Item>
