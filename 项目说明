@@ -29,5 +29,8 @@
 五、安装moment,用于时间的默认值
     yarn add moment --save
 
-六、安装echarts与echarts-for-react
+六、安装echarts与echarts-for-react：用于图表的插件
     yarn add echarts echarts-for-react --save
+
+七、安装react-draft-wysiwyg与draftjs-to-html:用于展示富文本与将富文本转成html
+     yarn add react-draft-wysiwyg draftjs-to-html --save

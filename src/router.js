@@ -41,6 +41,9 @@ import Bar from './pages/echarts/bar/index';
 import Pie from './pages/echarts/pie/index';
 import Line from './pages/echarts/line/index';
 
+//富文本编辑器
+import Rich from './pages/rich/index';
+
 //404页面
 import NoMatch from "./pages/nomatch";
 //404
@@ -79,6 +82,9 @@ export default class IRouter extends React.Component{
                                 <Route path="/admin/charts/bar" component={Bar}/>
                                 <Route path="/admin/charts/pie" component={Pie}/>
                                 <Route path="/admin/charts/line" component={Line}/>
+
+                                <Route path="/admin/fwb" component={Rich}/>
+
                                 <Route  component={NoMatch}/>
                             </Switch>
                         </Admin>
