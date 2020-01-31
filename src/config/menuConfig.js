@@ -90,20 +90,20 @@ const menuList = [
         key:'/admin/car-map'
     },
     {
-        title:'图标',
-        key:'/admin/icon',
+        title:'统计图',
+        key:'/admin/charts',
         children:[
             {
-                title:'图标1',
-                key:'/admin/icon/1',
+                title:'柱状图',
+                key:'/admin/charts/bar',
             },
             {
-                title:'图标2',
-                key:'/admin/icon/2',
+                title:'饼图',
+                key:'/admin/charts/pie',
             },
             {
-                title:'图标3',
-                key:'/admin/icon/3',
+                title:'折线图',
+                key:'/admin/charts/line',
             },
         ]
     },

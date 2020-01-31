@@ -28,3 +28,6 @@
 
 五、安装moment,用于时间的默认值
     yarn add moment --save
+
+六、安装echarts与echarts-for-react
+    yarn add echarts echarts-for-react --save

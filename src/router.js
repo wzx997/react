@@ -33,8 +33,13 @@ import Order from './pages/order/index';
 import OrderDetail from './pages/order/detail';
 
 //导入用户管理
-import User from './pages/user/index'
+import User from './pages/user/index';
 import UserDetail from  './pages/user/detail';
+
+//统计图
+import Bar from './pages/echarts/bar/index';
+import Pie from './pages/echarts/pie/index';
+import Line from './pages/echarts/line/index';
 
 //404页面
 import NoMatch from "./pages/nomatch";
@@ -71,6 +76,9 @@ export default class IRouter extends React.Component{
 
                                 <Route path="/admin/staff" component={User}/>
 
+                                <Route path="/admin/charts/bar" component={Bar}/>
+                                <Route path="/admin/charts/pie" component={Pie}/>
+                                <Route path="/admin/charts/line" component={Line}/>
                                 <Route  component={NoMatch}/>
                             </Switch>
                         </Admin>
