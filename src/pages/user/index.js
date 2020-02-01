@@ -384,7 +384,7 @@ class EditInfoForm extends React.Component{
         };
         return (
             <Form layout='horizontal' {...formItemLayout}>
-                <FormItem label='姓名' style={{display:'none'}}>
+                <FormItem label='用户id' style={{display:'none'}}>
                     {getFieldDecorator('id', {
                         initialValue: currentData.id,
                     })(

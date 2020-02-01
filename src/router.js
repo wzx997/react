@@ -1,11 +1,12 @@
 import React from "react";
-import {HashRouter, Route,Switch} from 'react-router-dom';
+import {HashRouter, Route, Switch,} from 'react-router-dom';
 import App from "./App";
 
 //导入自定义的组件
 import Login from './pages/login';//登录页面
 import Admin from './admin.js';//admin主页面
-import Common from './common';//耳机菜单的根组件
+import Common from './common';//菜单的根组件
+import Home from './pages/home/index';//Home组件
 
 //导入ui模块
 import Buttons from './pages/ui/buttons/buttons';//admin页面下的UI下的buttons组件
@@ -61,6 +62,8 @@ export default class IRouter extends React.Component{
                     <Route path="/admin" render={()=>
                         <Admin>{/*加载admin的子路由*/}
                             <Switch>
+                                <Route path="/admin/home" component={Home}/>
+
                                 <Route path="/admin/ui/buttons" component={Buttons}/>
                                 <Route path="/admin/ui/modals" component={Modals}/>
                                 <Route path="/admin/ui/loads" component={Loads}/>

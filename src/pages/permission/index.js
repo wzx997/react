@@ -10,7 +10,8 @@ import {
     notification,
     Select,
     Table,
-    Tree
+    Tree,
+    Transfer
 } from 'antd';
 import './index.less';
 
@@ -28,8 +29,11 @@ export default class PermissionUser extends React.Component{
         dataTotal:0,
         isShowCreateRole:false,
         isPermVisible:false,
+        isUserVisible:false,
         currentData:{},
-        menuInfo:[]
+        menuInfo:[],
+        mockData:[],
+        targetKeys:[]
     }
 
     componentDidMount() {
@@ -123,6 +127,7 @@ export default class PermissionUser extends React.Component{
             if (!err) {
                 let params = {
                     role_name: values.role_name,
+                    role_id:values.role_id,
                     status:values.status,
                     menu:this.state.menuInfo
                 };
@@ -153,6 +158,95 @@ export default class PermissionUser extends React.Component{
                 )
             }
         });
+    }
+
+    //用户授权的模态框
+    handleUserAuth = (record) => {
+        this.setState({
+            isUserVisible:true,
+            currentData:record,
+        })
+        this.getAllUserList(record.id);
+    }
+
+    //用户授权的提交
+    handleRoleAuthSubmit = (e) => {
+        e.preventDefault();
+        this.roleAuthForm.props.form.validateFieldsAndScroll((err, values) => {
+            if (!err) {
+                let params = {
+                    role_name: values.role_name,
+                    role_id:values.role_id,
+                    user_id:this.state.targetKeys
+                };
+                console.log(JSON.stringify(params));
+                const key = 'update';
+                message.loading({content: '正在授权......', key, duration: 0});
+                axios.ajax({
+                    url: 'auth/setAuth',
+                    data: {
+                        params: params
+                    }
+                }).then((res) => {
+                    if (res.code === 0) {
+                        message.success({content: res.msg, key, duration: 2});
+                    } else {
+                        message.error({content: res.msg, key, duration: 2});
+                    }
+                    this.roleAuthForm.props.form.resetFields();
+                    this.setState({
+                        isUserVisible: false,
+                    });
+                });
+            } else {
+                notification.error({
+                        message: '发生了一些错误！！！',
+                        description: '请确信息填写完成。'
+                    }
+                )
+            }
+        });
+    }
+
+    //获取用户列表
+    getAllUserList = (id) => {
+        axios.ajax({
+            url:'auth/getUserList',
+            data:{
+                params:{
+                    id:id
+                }
+            }
+        }).then((res)=>{
+            if (res.code !== 0){
+                message.error(res.msg,2);
+            }else {
+                this.getAuthUserList(res.data.item_list);
+            }
+        });
+    }
+
+    //筛选目标用户
+    getAuthUserList = (dataSource) => {
+        const mockData = [];
+        const targetKeys = [];
+        if (dataSource && dataSource.length > 0){
+            for (let i = 0; i < dataSource.length; i++){
+                const data = {
+                    key:dataSource[i].user_id,
+                    title:dataSource[i].user_name,
+                    status:dataSource[i].status
+                }
+                if (data.status === 1){
+                    targetKeys.push(data.key);
+                }
+                mockData.push(data);
+            }
+            this.setState({
+                mockData:mockData,
+                targetKeys:targetKeys
+            })
+        }
     }
 
 
@@ -203,7 +297,7 @@ export default class PermissionUser extends React.Component{
                         >设置权限</span>
                         <Divider type="vertical"/>
                         <span
-                            // onClick={() => this.editInfo('edit',record)}
+                            onClick={() => this.handleUserAuth(record)}
                             style={{color: '#1890ff', cursor: 'pointer'}}
                         >用户授权</span>
                     </span>
@@ -257,6 +351,29 @@ export default class PermissionUser extends React.Component{
                         }}
                     />
                 </Modal>
+                <Modal
+                    title = '用户授权'
+                    visible = {this.state.isUserVisible}
+                    onOk = {this.handleRoleAuthSubmit}
+                    onCancel={()=>{
+                        this.setState({
+                            isUserVisible: false,
+                        });
+                    }}
+                    width={600}
+                >
+                    <RoleAuthForm
+                        wrappedComponentRef={(inst) => {this.roleAuthForm = inst;}}
+                        currentData = {this.state.currentData}
+                        targetKeys = {this.state.targetKeys}
+                        mockData = {this.state.mockData}
+                        patchUserInfo = {(targetKeys) => {
+                            this.setState({
+                                targetKeys:targetKeys
+                            })
+                        }}
+                    />
+                </Modal>
             </div>
         );
     }
@@ -277,7 +394,7 @@ class CreateRole extends React.Component{
         };
         return (
             <Form layout='horizontal' {...formItemLayout}>
-                <FormItem label='姓名'>
+                <FormItem label='角色名'>
                     {getFieldDecorator('role_name', {
                         rules: [{required: true, message: '请输入角色名称!'}],
                     })(
@@ -336,6 +453,13 @@ class PerEditForm extends React.Component{
         };
         return (
             <Form layout='horizontal' {...formItemLayout}>
+                <FormItem label='角色id' style={{display:'none'}}>
+                    {getFieldDecorator('role_id', {
+                        initialValue: currentData.id,
+                    })(
+                        <Input/>
+                    )}
+                </FormItem>
                 <FormItem label='角色名'>
                     {getFieldDecorator('role_name', {
                         initialValue:currentData.role_name
@@ -371,3 +495,60 @@ class PerEditForm extends React.Component{
     }
 }
 PerEditForm = Form.create({})(PerEditForm);
+
+class RoleAuthForm extends React.Component{
+    filterOption = (inputValue, option) => {
+        return  option.title.indexOf(inputValue) > -1;
+    }
+
+    handleChange = (targetKeys) => {
+        this.props.patchUserInfo(targetKeys);
+    };
+
+    render() {
+        const { getFieldDecorator } = this.props.form;
+        const currentData = this.props.currentData;
+        const targetKeys = this.props.targetKeys;
+        const mockData = this.props.mockData;
+        const formItemLayout = {
+            labelCol: {
+                xs: { span: 24 },
+                sm: { span: 5 },
+            },
+            wrapperCol: {
+                xs: { span: 24 },
+                sm: { span: 18 },
+            },
+        };
+        return (
+            <Form layout='horizontal' {...formItemLayout}>
+                <FormItem label='角色id' style={{display:'none'}}>
+                    {getFieldDecorator('role_id', {
+                        initialValue: currentData.id,
+                    })(
+                        <Input/>
+                    )}
+                </FormItem>
+                <FormItem label='角色名'>
+                    {getFieldDecorator('role_name', {
+                        initialValue:currentData.role_name
+                    })(
+                        <Input disabled/>
+                    )}
+                </FormItem>
+                <FormItem label='选择用户'>
+                    <Transfer
+                        dataSource={mockData}
+                        titles={['待选用户','已选用户']}
+                        showSearch
+                        filterOption={this.filterOption}
+                        targetKeys={targetKeys}
+                        render={item => item.title}
+                        onChange={this.handleChange}
+                    />
+                </FormItem>
+            </Form>
+        );
+    }
+}
+RoleAuthForm = Form.create({})(RoleAuthForm);
