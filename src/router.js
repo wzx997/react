@@ -44,6 +44,9 @@ import Line from './pages/echarts/line/index';
 //富文本编辑器
 import Rich from './pages/rich/index';
 
+//权限控制
+import PermissionUser from "./pages/permission";
+
 //404页面
 import NoMatch from "./pages/nomatch";
 //404
@@ -84,6 +87,8 @@ export default class IRouter extends React.Component{
                                 <Route path="/admin/charts/line" component={Line}/>
 
                                 <Route path="/admin/fwb" component={Rich}/>
+
+                                <Route path="/admin/auth" component={PermissionUser}/>
 
                                 <Route  component={NoMatch}/>
                             </Switch>
