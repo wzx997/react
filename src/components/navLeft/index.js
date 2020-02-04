@@ -8,11 +8,24 @@ import {NavLink} from 'react-router-dom'
 const {SubMenu} = Menu;
 
 export default class NavLeft extends React.Component {
+    state = {
+        currentKey:''
+    }
+
     componentWillMount() {
         const menuTreeNode = this.renderMenu(MenuConfig);
+        let currentKey = window.location.hash.replace(/#|\?.*$/g,'');
         this.setState({
+            currentKey,
             menuTreeNode
         });
+    }
+
+     //点击菜单的事件
+    handleClick = (item) => {
+        this.setState({
+            currentKey:item.key
+        })
     }
 
      //菜单渲染
@@ -39,7 +52,11 @@ export default class NavLeft extends React.Component {
                 <div className="logo">
                     <h1>Imooc Ms</h1>
                 </div>
-                    <Menu theme="dark">
+                <Menu
+                    onClick={this.handleClick}
+                    selectedKeys={[this.state.currentKey]}
+                    theme="dark"
+                >
                     {this.state.menuTreeNode}
                 </Menu>
             </div>

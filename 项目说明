@@ -34,3 +34,6 @@
 
 七、安装react-draft-wysiwyg与draftjs-to-html:用于展示富文本与将富文本转成html
      yarn add react-draft-wysiwyg draftjs-to-html --save
+
+八、安装redux与react-redux
+    yarn add redux react-redux --save
