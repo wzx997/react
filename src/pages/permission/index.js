@@ -18,6 +18,8 @@ import './index.less';
 import axios from '../../axios';
 import menu from '../../config/menuConfig';
 
+import TestModal from "./test/index";
+
 const FormItem = Form.Item;
 const {Option} = Select;
 const { TreeNode } = Tree;
@@ -300,6 +302,11 @@ export default class PermissionUser extends React.Component{
                             onClick={() => this.handleUserAuth(record)}
                             style={{color: '#1890ff', cursor: 'pointer'}}
                         >用户授权</span>
+                        <Divider type="vertical"/>
+                        <span
+                            onClick={() => this.testModal.init(record.id)}
+                            style={{color: '#1890ff', cursor: 'pointer'}}
+                        >客户档案</span>
                     </span>
                 ),
             },
@@ -374,6 +381,8 @@ export default class PermissionUser extends React.Component{
                         }}
                     />
                 </Modal>
+
+                <TestModal ref={v => this.testModal = v}/>
             </div>
         );
     }

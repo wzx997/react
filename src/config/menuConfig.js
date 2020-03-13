@@ -52,6 +52,10 @@ const menuList = [
             {
                 title:'注册',
                 key:'/admin/form/reg',
+            },
+            {
+                title:'动态表单',
+                key:'/admin/form/dynamic_form',
             }
         ]
     },
@@ -110,6 +114,10 @@ const menuList = [
     {
         title:'权限',
         key:'/admin/auth'
+    },
+    {
+        title:'测试',
+        key:'/admin/test'
     },
 ];
 export default menuList;

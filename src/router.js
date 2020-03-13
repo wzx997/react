@@ -9,18 +9,19 @@ import Common from './common';//菜单的根组件
 import Home from './pages/home/index';//Home组件
 
 //导入ui模块
-import Buttons from './pages/ui/buttons/buttons';//admin页面下的UI下的buttons组件
-import Modals from './pages/ui/modals/modals';//admin页面下的UI下的modal组件
-import Loads from './pages/ui/loading/loadings';//admin页面下的UI下的buttons组件
-import Notices from './pages/ui/notices/notices';//admin页面下的UI下的notices组件
-import Messages from './pages/ui/messages/messages';//admin页面下的UI下的messages组件
-import MyTabs from './pages/ui/tabs/tabs';//admin页面下的UI下的tabs组件
-import Gallery from './pages/ui/gallery/gallery';//admin页面下的UI下的gallery组件
-import Carousels from './pages/ui/carousel/carousels';//admin页面下的UI下的carousels组件
+import Buttons from './pages/ui/buttons/buttons';
+import Modals from './pages/ui/modals/modals';
+import Loads from './pages/ui/loading/loadings';
+import Notices from './pages/ui/notices/notices';
+import Messages from './pages/ui/messages/messages';
+import MyTabs from './pages/ui/tabs/tabs';
+import Gallery from './pages/ui/gallery/gallery';
+import Carousels from './pages/ui/carousel/carousels';
 
 //导入form模块
 import FormLogin from './pages/form/login/login';
 import Reg from './pages/form/reg/reg';
+import DynamicForm from './pages/form/dynamic_form/index';
 
 //导入table模块
 import BasicTable from './pages/table/basicTable/basicTable';
@@ -47,6 +48,9 @@ import Rich from './pages/rich/index';
 
 //权限控制
 import PermissionUser from "./pages/permission";
+
+//测试页面
+import Test from "./pages/test";
 
 //404页面
 import NoMatch from "./pages/nomatch";
@@ -75,6 +79,7 @@ export default class IRouter extends React.Component{
 
                                 <Route path="/admin/form/login" component={FormLogin}/>
                                 <Route path="/admin/form/reg" component={Reg}/>
+                                <Route path="/admin/form/dynamic_form" component={DynamicForm}/>
 
                                 <Route path="/admin/table/basic-table" component={BasicTable}/>
                                 <Route path="/admin/table/high-table" component={HighTable}/>
@@ -92,6 +97,8 @@ export default class IRouter extends React.Component{
                                 <Route path="/admin/fwb" component={Rich}/>
 
                                 <Route path="/admin/auth" component={PermissionUser}/>
+
+                                <Route path="/admin/test" component={Test}/>
 
                                 <Route  component={NoMatch}/>
                             </Switch>
