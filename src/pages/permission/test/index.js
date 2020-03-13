@@ -1,10 +1,6 @@
 import React from "react";
 import {
-    Modal,
-    Row,
-    Col,
-    Button,
-    message,
+    Modal, Row, Col, Button, message,
     Card, Tooltip, notification, Table, Alert, Spin
 } from 'antd';
 
