@@ -361,7 +361,7 @@ export default class TestModal extends React.Component {
 
                             />
                         ) : (
-                            (data.is_exist && data.is_exist === 0) ? (
+                            (data.is_exist === 0) ? (
                                 <Alert
                                     style={{marginTop: 20}}
                                     type="warning" showIcon
@@ -393,7 +393,7 @@ export default class TestModal extends React.Component {
                                 background={data.background ? data.background : {}}
                                 mainEdit={mainEdit}
                                 isOldVersion={isOldVersion}
-                                is_exist={data.is_exist ? data.is_exist : 1}
+                                is_exist={data.is_exist}
                                 id={id}
 
                                 wrappedComponentRef={(inst) => {
@@ -407,7 +407,7 @@ export default class TestModal extends React.Component {
                                 chanceManage={data.chanceManage ? data.chanceManage : {}}
                                 mainEdit={mainEdit}
                                 isOldVersion={isOldVersion}
-                                is_exist={data.is_exist ? data.is_exist : 1}
+                                is_exist={data.is_exist}
                                 id={id}
                                 wrappedComponentRef={(inst) => {
                                     this.chanceManageForm = inst;
@@ -420,7 +420,7 @@ export default class TestModal extends React.Component {
                                 customerFocus={data.customerFocus ? data.customerFocus : {}}
                                 mainEdit={mainEdit}
                                 isOldVersion={isOldVersion}
-                                is_exist={data.is_exist ? data.is_exist : 1}
+                                is_exist={data.is_exist}
                                 id={id}
                                 wrappedComponentRef={(inst) => {
                                     this.customerFocusForm = inst;
@@ -433,7 +433,7 @@ export default class TestModal extends React.Component {
                                 riskManage={data.riskManage ? data.riskManage : {}}
                                 mainEdit={mainEdit}
                                 isOldVersion={isOldVersion}
-                                is_exist={data.is_exist ? data.is_exist : 1}
+                                is_exist={data.is_exist}
                                 id={id}
                                 wrappedComponentRef={(inst) => {
                                     this.riskManageForm = inst;
