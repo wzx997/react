@@ -23,6 +23,7 @@ export default class Admin extends React.Component{
                             {/*这里是内容部分*/}
                             {/*<Home/>*/}
                             {this.props.children}
+                            {/*aaa*/}
                         </Row>
                         <Footer></Footer>
                     </Col>
